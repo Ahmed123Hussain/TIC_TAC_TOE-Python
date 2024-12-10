@@ -14,7 +14,7 @@ def print_board(board):
 #Dictionary containing indicces
 
 
-#performs computer's Turn
+
 def computer_turn(board):
     x = random.randint(0, 2)
     y = random.randint(0, 2)
@@ -28,8 +28,6 @@ def computer_turn(board):
 
 
 #computer_turn(board)
-
-#performs user turn(optimization required)
 def user_turn(board):
   print()
   x=0
@@ -91,7 +89,6 @@ def user_turn(board):
      x=x+1
      print_board(board)
 
-#Raw implementation of validation checking of moves
 def check_valid(board,place):
    if(place == 1):
      if(board[0][0] == 'x' or board[0][0] == 'o'):
@@ -153,15 +150,60 @@ dict = {
     9:board[2][2]
 }
 
-#Runs the game
+
+def win_game(board):
+    #1st row
+  if (board[0][0] == board[0][1] == board[0][2] == 'x' or board[0][0] == board[0][1] == board[0][2] == 'o'):
+    return True
+    #2nd row
+  elif (board[1][0] == board[1][1] == board[1][2] == 'x' or board[1][0] == board[1][1] == board[1][2] == 'o'):
+    return True
+    #3rd row
+  elif (board[2][0] == board[2][1] == board[2][2] == 'x' or board[2][0] == board[2][1] == board[2][2] == 'o'):
+    return True
+    #1st col
+  elif (board[0][0] == board[1][0] == board[2][0] == 'x' or board[0][0] == board[1][0] == board[2][0] == 'o'):
+    return True
+    #2nd col
+  elif (board[0][1] == board[1][1] == board[2][1] == 'x' or board[0][1] == board[1][1] == board[2][1] == 'o'):
+    return True
+    #3rd col
+  elif (board[0][2] == board[1][2] == board[2][2] == 'x' or board[0][2] == board[1][2] == board[2][2] == 'o'):
+    return True
+    #1st diagonal
+  elif (board[0][0] == board[1][1] == board[2][2] == 'x' or board[0][0] == board[1][1] == board[2][2] == 'o'):
+    return True
+    #2nd diagonal
+  elif (board[0][2] == board[1][1] == board[2][0] == 'x' or board[0][2] == board[1][1] == board[2][0] == 'o'):
+    return True
+  else:
+    return False
+  
+
+
+
+
+
 def run(board):
   flg = 2
   while(flg<=9):
     computer_turn(board)
+    if(win_game(board)):
+      print()
+      print("COMPUTER WON")
+      break
     user_turn(board)
+    if(win_game(board)):
+      print()
+      print("YOU WON")
+      break
     flg+=2
    #print(flg)
-  computer_turn(board)
+  if(not(win_game(board))):
+    computer_turn(board)
+    if(win_game(board)):
+      print()
+      print("COMPUTER WON")
   print()
   print("GAME OVER")
 
