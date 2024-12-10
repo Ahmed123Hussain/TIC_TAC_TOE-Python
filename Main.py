@@ -21,6 +21,7 @@ def computer_turn(board):
     if(board[x][y] == 'x' or board[x][y] == 'o'):
       computer_turn(board)
     else:
+     print()
      print("Computer's Turn --------")
      board[x][y] = 'x'
      print_board(board)
@@ -154,8 +155,14 @@ dict = {
 
 #Runs the game
 def run(board):
- while(True):
+  flg = 2
+  while(flg<=9):
+    computer_turn(board)
+    user_turn(board)
+    flg+=2
+   #print(flg)
   computer_turn(board)
-  user_turn(board)
+  print()
+  print("GAME OVER")
 
 run(board)
